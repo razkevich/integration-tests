@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.sbrf.ufs.eu</groupId>
+    <artifactId>bh-integration-tests</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <description>Business Hub Integration Tests</description>
+
+    <organization>
+        <name>SberTech</name>
+        <url>http://sberbank.ru</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Sberbank Only</name>
+            <comments>Only Sberbank with subsidiaries may have and use this distribution</comments>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Alexey Razkevich</name>
+            <email>AVRazkevich.SBT@sberbank.ru</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Igor Kolosov</name>
+            <email>IIKolosov.SBT@sberbank.ru</email>
+            <roles>
+                <role>delivery manager</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus-alpha</id>
+            <url>http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/efs_release/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-alpha</id>
+            <url>http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/efs_snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdk.version>1.6</jdk.version>
+        <junit.version>4.12</junit.version>
+        <spring.version>4.2.2.RELEASE</spring.version>
+        <h2.version>1.4.188</h2.version>
+        <oracle.version>11.2.0</oracle.version>
+        <log4j2.version>2.4.1</log4j2.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>soapui</groupId>
+            <artifactId>soapui-5.2.1</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/soapui-5.2.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>soapui</groupId>
+            <artifactId>xmlbeans-2.6.0</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/xmlbeans-2.6.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${basedir}/lib/*</additionalClasspathElement>
+                    </additionalClasspathElements>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
